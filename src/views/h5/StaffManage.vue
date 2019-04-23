@@ -3,7 +3,7 @@
     <div class="banner">
         <img class="banner-bg" src="../../assets/image/banner.png" alt="">
         <div class="banner-con">
-            <div class="text">昆明飞讯商贸有限公司</div>
+            <div class="text">昆明飞迅商贸有限公司</div>
             <van-button class="banner-btn" @click="openQrcode" round type="info" size="normal">邀请员工开通</van-button>
         </div>
     </div>

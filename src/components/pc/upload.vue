@@ -4,6 +4,7 @@
         class="upload-demo"
         action="/api/public/imgUpload"
         :before-remove="beforeRemove"
+        :on-remove="onRemove"
         :multiple="multiple"
         :limit="limit"
         :on-exceed="handleExceed"
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { log } from 'util';
     export default {
         name: '',
         props: {
@@ -48,9 +50,17 @@
                 fileList: [],
             }
         },
+        watch: {
+            fileList(val) {
+                this.$emit('update:value', val)
+            }
+        },
         methods: {
             beforeRemove(file, fileList) {
                 return this.$confirm(`确定移除 ${ file.name }？`);
+            },
+            onRemove(file, fileList) {
+                this.fileList = fileList
             },
             handleExceed(files, fileList) {
                 this.$message.warning(`超出限制，这里最多上传 ${this.limit} 个文件`);
@@ -58,7 +68,6 @@
             onSuccess(res) {
                 let { data } = res;
                 this.fileList.push(data.file)
-                this.$emit('update:value', this.fileList)
             }
         }
     }
