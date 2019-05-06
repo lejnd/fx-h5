@@ -1,55 +1,16 @@
 <template>
-    <div class="company-register">
+    <div class="simple-register">
         <header-bar name="开通企业视频彩铃"></header-bar>
         <div class="form-wrapper">
             <el-form ref="form" :model="form" label-width="145px" :rules="rules">
                 <el-form-item label="公司名称" prop="company_name">
                     <el-input :readonly="isBind" v-model="form.company_name" placeholder="请输入"></el-input>
                 </el-form-item>
-                <el-form-item label="营业执照号" prop="business_number">
-                    <el-input :readonly="isBind" v-model="form.business_number" placeholder="请输入"></el-input>
-                </el-form-item>
-                <el-form-item label="营业执照" prop="business_license">
-                    <fx-upload
-                        :value.sync="form.business_license"
-                        :limit="1"
-                        :disabled="isBind"
-                    ></fx-upload>
-                </el-form-item>
-                <el-form-item label="法人姓名" prop="legal_name">
-                    <el-input :readonly="isBind" v-model="form.legal_name" placeholder="请输入"></el-input>
-                </el-form-item>
-                <el-form-item label="法人身份证正面" prop="card_positive">
-                    <fx-upload
-                        :value.sync="form.card_positive"
-                        :limit="1"
-                        :disabled="isBind"
-                    ></fx-upload>
-                </el-form-item>
-                <el-form-item label="法人身份证反面" prop="card_reverse">
-                    <fx-upload
-                        :value.sync="form.card_reverse"
-                        :limit="1"
-                        :disabled="isBind"
-                    ></fx-upload>
-                </el-form-item>
-                <el-form-item label="门头照片" prop="sign">
-                    <fx-upload
-                        :value.sync="form.sign"
-                        multiple
-                        :limit="3"
-                        tip="请上传 3 张门头照片"
-                        :disabled="isBind"
-                    ></fx-upload>
-                </el-form-item>
                 <el-form-item label="联系人姓名" prop="contact_name">
                     <el-input :readonly="isBind" v-model="form.contact_name" placeholder="请输入"></el-input>
                 </el-form-item>
                 <el-form-item label="联系人手机号" prop="contact_mobile">
                     <el-input :readonly="isBind" v-model="form.contact_mobile" placeholder="请输入"></el-input>
-                </el-form-item>
-                <el-form-item label="邮箱" prop="email">
-                    <el-input :readonly="isBind" v-model="form.email" placeholder="请输入"></el-input>
                 </el-form-item>
                 <el-form-item label="上传员工授权协议" prop="agreement" multiple>
                     <fx-upload
@@ -87,32 +48,11 @@ const rules = {
     company_name: [
         { required: true, message: '请输入公司名称', trigger: 'blur' },
     ],
-    business_number: [
-        { required: true, message: '请输入营业执照号', trigger: 'blur' },
-    ],
-    business_license: [
-        { type: 'array', required: true, message: '请上传营业执照', trigger: 'change' },
-    ],
-    legal_name: [
-        { required: true, message: '请输入法人姓名', trigger: 'blur' },
-    ],
-    card_positive: [
-        { type: 'array', required: true, message: '请上传法人身份证正面照', trigger: 'change' },
-    ],
-    card_reverse: [
-        { type: 'array', required: true, message: '请上传法人身份证反面照', trigger: 'change' },
-    ],
-    sign: [
-        { type: 'array', required: true, message: '请上传门头照片', trigger: 'change' },
-    ],
     contact_name: [
         { required: true, message: '请输入联系人姓名', trigger: 'blur' },
     ],
     contact_mobile: [
         { required: true, message: '请输入联系人手机号', trigger: 'blur' },
-    ],
-    email: [
-        { required: true, message: '请输入联系人邮箱', trigger: 'blur' },
     ],
     agreement: [
         { type: 'array', required: true, message: '请上传员工授权协议', trigger: 'change' },
@@ -120,7 +60,7 @@ const rules = {
 }
 
 export default {
-    name: "CompanyRegister",
+    name: "SimpleRegister",
     components: {
         FxUpload, HeaderBar,
     },
@@ -132,19 +72,12 @@ export default {
             openDialog: false,
             qrcode: null,
             companyId: '',
-            agreementTip: `下载<a href="${config.ip}/company.xls" download style="color:#2878ff">《员工协议模版》</a>，打印并填写完成后拍照上传`,            
+            agreementTip: `下载<a href="${config.ip}/company.xls" download style="color:#2878ff">《员工协议模版》</a>，打印并填写完成后拍照上传`,
             form: {
                 company_name: '',
-                business_number: '',
-                business_license: [], // 上传营业执照
-                email: '',
                 contact_mobile: '',
                 contact_name: '',
-                legal_name: '',
-                sign: [],  // 上传门头照片
                 agreement: [],   // 上传员工协议
-                card_positive: [],  // 身份证正面
-                card_reverse: [],   // 身份证反面
             },
         };
     },
@@ -153,7 +86,7 @@ export default {
             console.log(this.form);
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.$fly.post('/api/company/register', this.form)
+                    this.$fly.post('/api/company/register_already', this.form)
                     .then((res) => {
                         let { errcode, data, errmsg } = res;
                         if (errcode == 0) {
@@ -191,15 +124,11 @@ export default {
             this.$refs.downloadAgreement.click();
         }
     },
-    mounted () {
-        console.log(this.$route.params.id);
-        
-    }
 };
 </script>
 
 <style lang="less">
-.company-register {
+.simple-register {
     .form-wrapper {
         max-width: 520px;
         margin: 0 auto;

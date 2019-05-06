@@ -35,9 +35,17 @@ export default new Router({
             name: 'pc',
             component: () => import(/* webpackChunkName: "pc" */ './views/pc/Index.vue'),
             children: [{
+                path: '/pc/nav_home',
+                name: 'NavHome',
+                component: () => import(/* webpackChunkName: "NavHome" */ './views/pc/NavHome.vue')
+            }, {
                 path: '/pc/company_register',
                 name: 'CompanyRegister',
                 component: () => import(/* webpackChunkName: "CompanyRegister" */ './views/pc/CompanyRegister.vue')
+            }, {
+                path: '/pc/simple_register',
+                name: 'SimpleRegister',
+                component: () => import(/* webpackChunkName: "SimpleRegister" */ './views/pc/SimpleRegister.vue')
             }]
         },
     ]

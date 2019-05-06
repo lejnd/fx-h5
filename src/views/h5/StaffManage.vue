@@ -3,7 +3,7 @@
     <div class="banner">
         <img class="banner-bg" src="../../assets/image/banner.png" alt="">
         <div class="banner-con">
-            <div class="text">昆明飞迅商贸有限公司</div>
+            <div class="text">{{companyName}}</div>
             <van-button class="banner-btn" @click="openQrcode" round type="info" size="normal">邀请员工开通</van-button>
         </div>
     </div>
@@ -77,6 +77,7 @@ export default {
             errMsg: false,
             auditPop: false,
             auditQr: '',
+            companyName: ''
         }
     },
     computed: {
@@ -90,11 +91,12 @@ export default {
                 openid: this.openid,
                 keyword: this.keyword
             }).then((res) => {
-                let { errcode, errmsg, data, company_id } = res;
+                let { errcode, errmsg, data, company_id, company_name } = res;
                 if (errcode == 0 || errcode == 2) {
                     if (data) {
                         this.staffList = data || [];
                     }
+                    this.companyName = company_name;
                 } else if (errcode == 3) {
                     this.getAuditQrcode(company_id);
                     this.auditPop = true;

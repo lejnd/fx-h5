@@ -9,9 +9,9 @@
         <div class="block">
             <router-link to="pc/company_register">企业开通</router-link>
         </div>
-        <!-- <div class="block">
-            <router-link to="h5/dobind">微信绑定</router-link>
-        </div> -->
+        <div class="block">
+            <router-link to="pc/nav_home">PC导航页</router-link>
+        </div>
     </div>
 </template>
 
