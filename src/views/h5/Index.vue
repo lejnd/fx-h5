@@ -29,6 +29,11 @@ export default {
         ]),
     },
     mounted () {
+        const debug = process.env.NODE_ENV !== 'production'
+        if (debug) {
+            this.hasOpenid = true;
+            return;
+        }
         let code = wxjs.getQueryString('code')
         if (this.openid) {
             console.log('openid存在，直接请求');

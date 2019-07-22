@@ -4,11 +4,19 @@
         <div class="header">
             <img class="header-logo" src="../../assets/image/logoweb.png" alt="">
             <el-popover
+                v-if="!isWeiXin"
                 placement="bottom"
                 trigger="click">
                 <div class="qrcode" ref="qrCodeUrl"></div>                
                 <el-button slot="reference" class="header-btn" round plain>员工管理</el-button>
             </el-popover>
+            <el-button
+                v-if="isWeiXin"
+                slot="reference"
+                class="header-btn"
+                @click="gotoManage"
+                round plain>员工管理
+            </el-button>
         </div>
         <div class="main">
             <div class="welcome">
@@ -46,12 +54,18 @@
 <script>
 import QRCode from 'qrcodejs2';
 import config from '@/plugin/config.js'
+import common from '@/components/common';
 
 export default {
     name: 'NavHome',
     data() {
         return {
 
+        }
+    },
+    computed: {
+        isWeiXin() {
+            return common.isWeiXin();
         }
     },
     methods: {
@@ -78,6 +92,10 @@ export default {
                 this.qrcode.makeCode(`${host}/#/h5/staff_manage`)
             })
         },
+        gotoManage() {
+            let { host } = config;
+            window.location.href = `${host}/#/h5/staff_manage`
+        }
     },
     mounted () {
         this.openQrcode();
@@ -92,20 +110,22 @@ export default {
     color: #323C5A;
     .content {
         min-height: 100vh;
-        width: 1200px;
+        // width: 1200px;
         margin: 0 auto;
         display: flex;
         flex-flow: column;
         .header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding-top: 30px;
             &-logo {
                 height: 34px;
+                padding: 0 20px;
             }
             &-btn {
                 color: #3B67F5;
-                margin-right: 60px;
+                margin-right: 5.5rem;
             }
         }
         .main {
@@ -115,26 +135,28 @@ export default {
             justify-content: center;
             padding-bottom: 10%;
             .welcome {
-                padding: 10px 0 10px 0;
+                padding: 10px 0 10px 7rem;
                 &-en {
                     color: #8591B0;
-                    font-size: 26px;
+                    font-size: 1.8rem;
                     font-weight: 300;
                 }
                 &-title {
-                    font-size: 42px;
+                    font-size: 2.5rem;
                     font-weight: 500;
                     padding: 20px 0;
                 }
             }
             .enter {
                 display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
                 &-item {
                     position: relative;
-                    height: 307px;
+                    // height: 307px;
                     cursor: pointer;
                     &-bg {
-                        margin-left: -30px;
+                        // margin-left: -30px;
                     }
                     .enter-item-text {
                         position: absolute;
@@ -142,7 +164,7 @@ export default {
                         left: 50%;
                         transform: translate(-75%, -60%);
                         &-name {
-                            font-size: 36px;
+                            font-size: 2rem;
                             font-weight: 400;
                             padding: 30px 0;
                             span {

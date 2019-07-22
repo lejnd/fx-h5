@@ -1,15 +1,16 @@
 <template>
 <div class="fx-upload">
     <el-upload
+        ref="upload"
         class="upload-demo"
-        action="/api/public/imgUpload"
+        :action="action"
         :before-remove="beforeRemove"
         :on-remove="onRemove"
         :multiple="multiple"
         :limit="limit"
         :on-exceed="handleExceed"
         :on-success="onSuccess"
-        list-type="picture"
+        :list-type="listType"
         :disabled="disabled"
     >
         <el-button size="small" type="primary" plain>点击上传</el-button>
@@ -24,6 +25,10 @@ import { log } from 'util';
     export default {
         name: '',
         props: {
+            action: {
+                type: String,
+                default: () => '/api/public/imgUpload'
+            },
             multiple: {
                 type: Boolean,
                 default: () => false
@@ -35,6 +40,10 @@ import { log } from 'util';
             disabled: {
                 type: Boolean,
                 default: () => false
+            },
+            listType: {
+                type: String,
+                default: () => 'picture'
             },
             tip: {
                 type: String,
@@ -67,7 +76,12 @@ import { log } from 'util';
             },
             onSuccess(res) {
                 let { data } = res;
-                this.fileList.push(data.file)
+                if (!data) {
+                    this.$message.warning('上传失败');
+                    this.$refs.upload.clearFiles()
+                } else {
+                    this.fileList.push(data.file)
+                }
             }
         }
     }

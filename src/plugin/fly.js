@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import fly from 'flyio';
+import { Toast } from 'vant';
+Vue.use(Toast);
 
 // const debug = process.env.NODE_ENV !== 'production'
 
@@ -27,9 +29,9 @@ fly.interceptors.response.use(
     (err) => {
         //发生网络错误后会走到这里
         if (err.status == 404) {
-            return Promise.reject(err)
+            Toast('页面不存在');
         } else {
-            return Promise.reject(err)
+            Toast('连接错误');
         }
     }
 )

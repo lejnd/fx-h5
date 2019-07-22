@@ -1,8 +1,3 @@
-/**
- * @fileOverview app配置
- * @date 2018/06/17
- */
-
 const debug = process.env.NODE_ENV !== 'production'
 
 console.log('debug:', debug)
@@ -12,14 +7,14 @@ console.log('本地启动或构建的文件信息 | 结束----------------------
 console.log('')
 
 module.exports = {
-    publicPath: '/static/',
+    publicPath: '/static/migu_vue_static/',
     // publicPath: '/',
     filenameHashing: false,
     productionSourceMap: false,
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://mglyh.kmfx1.com', // 测试环境
+                target: 'http://vueapi.kmfx1.com', // 测试环境
                 changOrigin: true,
                 // pathRewrite: {
                 //     '^/api': ''

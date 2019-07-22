@@ -1,5 +1,7 @@
 import config from './plugin/config'
 
+const debug = process.env.NODE_ENV !== 'production'
+
 const { host, wx } = config;
 
 const getQueryString = (name) => {
@@ -14,10 +16,11 @@ const getQueryString = (name) => {
 }
 
 const wxLogin = () => {
-    // let href = encodeURIComponent(`${host}/#/h5/staff_manage`);
+    if (debug) return;
     let routerString = window.location.href.split('#')[1] || '';
     let realString = routerString.split('?')[0] || '';
     let href = encodeURIComponent(`${host}/#${realString}`);
+    // let href = encodeURIComponent(`${host}/${realString}`);
     let wxLink = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wx.appid}&redirect_uri=${href}&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect`;
     window.location.href = wxLink;
 }

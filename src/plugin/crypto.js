@@ -28,5 +28,31 @@ export default {
         });
         var decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
         return decryptedStr.toString();
-    }
+    },
+    // ECB加密
+    /**
+     * 生成密钥字节数组, 原始密钥字符串不足128位, 补填0.
+     */
+    fillKey(key) {
+        const filledKey = Buffer.alloc(128 / 8);
+        const keys = Buffer.from(key);
+        if (keys.length < filledKey.length) {
+            filledKey.map((b, i) => filledKey[i] = keys[i]);
+        }
+        return filledKey;
+    },
+    encryptECB(word, keyStr) {
+        let key = CryptoJS.enc.Utf8.parse(this.fillKey(keyStr));
+        let data = CryptoJS.enc.Utf8.parse(word);
+        const cipher = CryptoJS.AES.encrypt(data, key, {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7,
+          });
+          // 将加密后的数据转换成 Base64
+          const base64Cipher = cipher.ciphertext.toString(CryptoJS.enc.Base64);
+          // 处理 Android 某些低版的BUG
+        //   const resultCipher = base64Cipher.replace(/\+/g,'-').replace(/\//g,'_');
+          // 返回加密后的经过处理的 Base64
+          return base64Cipher;
+    },
 }
