@@ -7,6 +7,9 @@
             <router-link to="h5/staff_register">员工注册</router-link>
         </div>
         <div class="block">
+            <router-link to="h5/video_example">PC导航页</router-link>
+        </div>
+        <div class="block">
             <router-link to="pc/company_register">企业开通</router-link>
         </div>
         <div class="block">

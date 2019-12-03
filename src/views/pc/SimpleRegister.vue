@@ -239,7 +239,7 @@ export default {
         height: 50px;
         .codeImg {
             width: 150px;
-            height: 40px;
+            height: 48px;
             cursor: pointer;
             // margin-top: -5px;
         }
@@ -248,6 +248,8 @@ export default {
         // border-bottom: 1px solid #ddd;
         .el-input__inner {
             // border: 0;
+            height: 48px;
+            line-height: 48px;
         }
         .upload-demo {
             padding: 6px;

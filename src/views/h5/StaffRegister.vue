@@ -52,7 +52,7 @@ import crypto from '@/plugin/crypto.js';
 const sign = () => {
     let timestamp = Date.parse(new Date());
     let str = `appId=525200&time=${timestamp}&version=1.0`;
-    return crypto.encryptECB(str, '###fx9541');
+    return crypto.encrypt2(str, '0501030602070804', '0102030405060708');
 }
 
 export default {

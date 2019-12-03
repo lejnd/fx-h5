@@ -7,7 +7,7 @@ console.log('本地启动或构建的文件信息 | 结束----------------------
 console.log('')
 
 module.exports = {
-    publicPath: '/static/migu_vue_static/',
+    publicPath: debug ? '/' : '/static/migu_vue_static/',
     // publicPath: '/',
     filenameHashing: false,
     productionSourceMap: false,

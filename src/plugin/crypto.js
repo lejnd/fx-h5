@@ -15,6 +15,16 @@ export default {
         let str = CryptoJS.enc.Base64.stringify(encrypted.ciphertext);
         return Base64.encode(str);
     },
+    encrypt2(word, keyStr, ivStr) {
+        let key = CryptoJS.enc.Utf8.parse(keyStr);
+        let iv = CryptoJS.enc.Utf8.parse(ivStr);
+        var encrypted = CryptoJS.AES.encrypt(word, key, {
+            iv: iv,
+            mode: CryptoJS.mode.CBC,
+            padding: CryptoJS.pad.Pkcs7
+        });
+        return encrypted.toString()        
+    },
     //解密
     decrypt(word, keyStr, ivStr) {
         let key = CryptoJS.enc.Utf8.parse(keyStr);

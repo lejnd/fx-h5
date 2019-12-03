@@ -5,4 +5,7 @@
 </template>
 
 <style lang="less">
+#app {
+    background-color: #fff;
+}
 </style>

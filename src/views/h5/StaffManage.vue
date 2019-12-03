@@ -387,12 +387,13 @@ export default {
             position: absolute;
             top: 0;
             left: 0;
-            z-index: -1;
+            // z-index: -1;
         }
         .banner-con {
             font-size: 18/11rem;
             color: #fff;
             text-align: center;
+            z-index: 1;
             .banner-btn {
                 margin-top: 15/11rem;
                 width: 100%;

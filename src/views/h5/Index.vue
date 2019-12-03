@@ -58,5 +58,9 @@ export default {
 </script>
 
 <style lang="less">
-    
+    .bg-f5 {
+        min-height: 100vh;
+        background-color: #f5f5f5;
+        padding-bottom: 40px;
+    }
 </style>

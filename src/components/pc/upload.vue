@@ -78,10 +78,13 @@ import { log } from 'util';
                 let { data } = res;
                 if (!data) {
                     this.$message.warning('上传失败');
-                    this.$refs.upload.clearFiles()
+                    this.clearFiles();
                 } else {
                     this.fileList.push(data.file)
                 }
+            },
+            clearFiles() {
+                this.$refs.upload.clearFiles()
             }
         }
     }

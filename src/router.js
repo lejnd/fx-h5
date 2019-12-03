@@ -41,6 +41,14 @@ export default new Router({
                 path: '/h5/errbind',
                 name: 'ErrBind',
                 component: () => import(/* webpackChunkName: "ErrBind" */ './views/h5/ErrBind.vue')
+            }, {
+                path: '/h5/make_video',
+                name: 'MakeVideo',
+                component: () => import(/* webpackChunkName: "MakeVideo" */ './views/h5/MakeVideo.vue')
+            }, {
+                path: '/h5/common_success',
+                name: 'CommonSuccess',
+                component: () => import(/* webpackChunkName: "CommonSuccess" */ './views/h5/CommonSuccess.vue')
             }]
         },
         {
@@ -61,6 +69,14 @@ export default new Router({
                 path: '/pc/simple_register',
                 name: 'SimpleRegister',
                 component: () => import(/* webpackChunkName: "SimpleRegister" */ './views/pc/SimpleRegister.vue')
+            }, {
+                path: '/pc/video_example',
+                name: 'VideoExample',
+                component: () => import(/* webpackChunkName: "VideoExample" */ './views/pc/VideoExample.vue')
+            }, {
+                path: '/pc/merchant_register',
+                name: 'MerchantRegister',
+                component: () => import(/* webpackChunkName: "MerchantRegister" */ './views/pc/MerchantRegister.vue')
             }]
         },
     ]
